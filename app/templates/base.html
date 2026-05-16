@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEMS | Technical Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slate: { 850: '#151e2e', 900: '#0f172a' },
+                        emerald: { 500: '#10b981', 600: '#059669' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-900 text-gray-200 font-sans antialiased min-h-screen flex flex-col">
+    
+    <nav class="bg-slate-850 border-b border-gray-800 p-4 shadow-lg">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <a href="{{ url_for('main.dashboard') }}" class="text-2xl font-bold text-emerald-500 tracking-wider hover:text-emerald-400 transition-colors">
+                TEMS<span class="text-gray-500 text-sm ml-2">v1.0</span>
+            </a>
+            
+            <div class="flex items-center gap-6">
+                
+                {% if session.get('is_admin') %}
+                    <a href="{{ url_for('main.admin_dashboard') }}" class="text-emerald-400 hover:text-emerald-300 text-sm font-semibold tracking-wide transition-colors">
+                        &uarr; Command Center
+                    </a>
+                {% endif %}
+
+                <a href="{{ url_for('main.dashboard') }}" class="px-3 py-1 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded text-sm text-gray-400 transition-colors">
+                    Student Access
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-6xl mx-auto w-full p-6">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-slate-850 border-t border-gray-800 p-4 text-center text-sm text-gray-500 mt-auto">
+        &copy; 2026 Technical Education Management System
+    </footer>
+</body>
+</html>
